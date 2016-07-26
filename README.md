@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/Ubiquitous-Marmosets/Project-T2.png?label=ready&title=Ready)](https://waffle.io/Ubiquitous-Marmosets/Project-T2)
 # project-trendwave
 
 Getting started:
