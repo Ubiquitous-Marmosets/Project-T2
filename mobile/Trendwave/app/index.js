@@ -6,6 +6,7 @@ import PopTweets from './components/PopTweets';
 import PopHeadlines from './components/PopHeadlines';
 import TrendScore from './components/TrendScore';
 import EmotionalFeedback from './components/EmotionalFeedback';
+import Sentiment from './components/sentiment';
 
 // Here we can use import statesments using the
 // naming convention component.ios.js and component.android.js
@@ -66,6 +67,31 @@ export default class Trendwave extends Component {
     // *** end of logic for popTweets
   }
 
+  componentWillMount(){
+    fetch('http://localhost:3000/trends').then(response => response.json()).then(res => console.log(res));
+
+    fetch('http://localhost:3000/grabTweets', {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ q: 'Donald Trump' })//q })
+    }).then(res => res.json()).then(response => console.log(response))
+    .catch(response => console.log(response));
+
+    fetch('http://localhost:3000/grabTopTweet', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ q: 'Donald Trump'})
+    }).then(res => res.json()).then(response => console.log(response))
+    .catch(response => console.log(response));
+  }
+
+
   render() {
     return (
       <ScrollView style={styles.container}>
@@ -75,6 +101,7 @@ export default class Trendwave extends Component {
         <PopHeadlines />
         <TrendScore />
         <EmotionalFeedback />
+        <Sentiment />
         {/*<Component>*/}
         {/*<Component>*/}
         {/*<Component>*/}

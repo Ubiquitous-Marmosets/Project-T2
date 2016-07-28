@@ -58,7 +58,11 @@ module.exports = {
 			return new Promise(function(resolve, reject) {
 				grabTweets.get('search/tweets', {q: query, count: 100, result_type: 'recent', lang: 'en', result_type: 'recent', max_id: max_id}, function(error, tweets) {
 				  if (error) {
+<<<<<<< 7b1277729a1c91c524c20ff70d479dbed42b5390
 				 		reject(error)
+=======
+				 		reject(error) 
+>>>>>>> feat: sentiment analysis awaiting data
 				  } else {
 
 				  	// Declare cash variable used later to get the new max_id
