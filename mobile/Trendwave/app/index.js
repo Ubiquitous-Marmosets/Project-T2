@@ -8,6 +8,26 @@ import PieChart from './components/PieChart';
 
 // import Component from  './components/component' }
 
+fetch('http://localhost:3000/trends').then(response => response.json()).then(res => console.log(res));
+
+fetch('http://localhost:3000/grabTweets', {
+  method: "POST",
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ q: 'Donald Trump' })//q })
+}).then(res => res.json()).then(response => console.log(response));
+
+fetch('http://localhost:3000/grabTopTweet', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ q: 'Donald Trump'})
+}).then(res => res.json()).then(response => console.log(response));
+
 export default class Trendwave extends Component {
   constructor(props) {
     super(props);
