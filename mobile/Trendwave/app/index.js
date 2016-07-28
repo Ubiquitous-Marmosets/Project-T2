@@ -1,12 +1,33 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
+import PieChart from './components/PieChart';
+import PopTweets from './components/PopTweets';
+
 // Here we can use import statesments using the
 // naming convention component.ios.js and component.android.js
 
 // import Component from  './components/component' }
 
-import PopTweets from './components/PopTweets';
+fetch('http://localhost:3000/trends').then(response => response.json()).then(res => console.log(res));
+
+fetch('http://localhost:3000/grabTweets', {
+  method: "POST",
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ q: 'Donald Trump' })//q })
+}).then(res => res.json()).then(response => console.log(response));
+
+fetch('http://localhost:3000/grabTopTweet', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ q: 'Donald Trump'})
+}).then(res => res.json()).then(response => console.log(response));
 
 export default class Trendwave extends Component {
   constructor(props) {
@@ -19,6 +40,7 @@ export default class Trendwave extends Component {
     return (
       <View style={styles.container}>
         <Text>TrendWave</Text>
+        <PieChart />
         <PopTweets />
         {/*<Component>*/}
         {/*<Component>*/}
