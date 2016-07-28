@@ -30,7 +30,7 @@ var getSentiment = function(params) {
 };
 
 module.exports = {
-	
+
 	// grabTweets makes five requests to Twitter to pull the ~500 most recent tweet data on a topic
 	// then the tweet data is sent in aggregate to Watson for analysis
 	grabTweets: function(req, res) {
@@ -46,7 +46,7 @@ module.exports = {
 
 		// Set an initial max_id that will be far above any tweet ID received
 		var max_id = 100000000000000000000000000000000000000;
-		
+
 		// Declare a string variable which we will add tweet data to
 		var tweetString = '';
 
@@ -55,10 +55,10 @@ module.exports = {
 
 		// Promise function to get the 100 most recent Tweets from twitter
 		var callTwitter = function() {
-			return new Promise(function(resolve, reject) {	
+			return new Promise(function(resolve, reject) {
 				grabTweets.get('search/tweets', {q: query, count: 100, result_type: 'recent', lang: 'en', result_type: 'recent', max_id: max_id}, function(error, tweets) {
 				  if (error) {
-				 		reject(err) 
+				 		reject(error)
 				  } else {
 
 				  	// Declare cash variable used later to get the new max_id
@@ -80,12 +80,12 @@ module.exports = {
 					      tweetString += tweetObj.text
 					      .replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')
 					      .replace(/[`❤️~@#$%^&*()_|☆+\-=;:<>\{\}\[\]\\\/]/gi, ' ')
-					      
+
 					    })
 				    )
 				  }
 				})
-			})		
+			})
 		}
 
 
@@ -98,7 +98,7 @@ module.exports = {
 
 							// Send the tweets to Watson for analysis
 							getSentiment({text: tweetString}).then(function(data) {
-								
+
 								var positive = 0;
 								var negative = 0;
 
@@ -106,7 +106,7 @@ module.exports = {
 									// reweight the positive and negative scores to add up to 100%
 									positive = (1 + Number(data.score)) / 2;
 									negative = 1 - positive;
-									res.send({summary: 'Mostly Positive', positive: positive, negative: negative});									
+									res.send({summary: 'Mostly Positive', positive: positive, negative: negative});
 								} else {
 									// reweight the positive and negative scores to add up to 100%
 									negative = Math.abs((Number(data.score) - 1) / 2);
@@ -114,7 +114,7 @@ module.exports = {
 									res.send({summary: 'Mostly Negative', positive: positive, negative: negative});
 								}
 							});
-							
+
 						});
 					});
 				});
@@ -148,10 +148,15 @@ module.exports = {
 
 				// Send top two tweets to front end
 				// console.log(tweets.statuses[0].text)
-				res.json({firstUser: tweets.statuses[0].user.screen_name, firstTweet: tweets.statuses[0].text, firstTweetTime: firstTweetTime, secondUser: tweets.statuses[1].user.screen_name, secondTweet: tweets.statuses[1].text, secondTweetTime: secondTweetTime});
+				res.json({
+          firstUser: tweets.statuses[0].user.screen_name,
+          firstTweet: tweets.statuses[0].text,
+          firstTweetTime: firstTweetTime,
+          secondUser: tweets.statuses[1].user.screen_name,
+          secondTweet: tweets.statuses[1].text,
+          secondTweetTime: secondTweetTime});
 			}
-		});		
+		});
 	}
 
 }
-
