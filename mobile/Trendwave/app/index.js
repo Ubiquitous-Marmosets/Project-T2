@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
 import PieChart from './components/PieChart';
+import PopTweets from './components/PopTweets';
 
 // Here we can use import statesments using the
 // naming convention component.ios.js and component.android.js
@@ -40,6 +41,7 @@ export default class Trendwave extends Component {
       <View style={styles.container}>
         <Text>TrendWave</Text>
         <PieChart />
+        <PopTweets />
         {/*<Component>*/}
         {/*<Component>*/}
         {/*<Component>*/}
@@ -52,6 +54,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    // alignItems: 'center'
   }
 });
