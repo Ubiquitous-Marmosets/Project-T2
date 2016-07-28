@@ -3,6 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 
 import PieChart from './components/PieChart';
 import PopTweets from './components/PopTweets';
+import PopHeadlines from './components/PopHeadlines';
 
 // Here we can use import statesments using the
 // naming convention component.ios.js and component.android.js
@@ -42,6 +43,7 @@ export default class Trendwave extends Component {
         <Text>TrendWave</Text>
         <PieChart />
         <PopTweets />
+        <PopHeadlines />
         {/*<Component>*/}
         {/*<Component>*/}
         {/*<Component>*/}
