@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-import PieChart from './components/PieChart.ios.js';
+import PieChart from './components/PieChart';
 
 // Here we can use import statesments using the
 // naming convention component.ios.js and component.android.js
