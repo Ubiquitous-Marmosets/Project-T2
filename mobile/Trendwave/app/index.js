@@ -5,6 +5,7 @@ import PieChart from './components/PieChart';
 import PopTweets from './components/PopTweets';
 import PopHeadlines from './components/PopHeadlines';
 import TrendScore from './components/TrendScore';
+import EmotionalFeedback from './components/EmotionalFeedback';
 
 // Here we can use import statesments using the
 // naming convention component.ios.js and component.android.js
@@ -46,6 +47,7 @@ export default class Trendwave extends Component {
         <PopTweets />
         <PopHeadlines />
         <TrendScore />
+        <EmotionalFeedback />
         {/*<Component>*/}
         {/*<Component>*/}
         {/*<Component>*/}
