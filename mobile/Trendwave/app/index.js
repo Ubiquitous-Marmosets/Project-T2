@@ -7,7 +7,6 @@ import PieChart from './components/PieChart';
 // naming convention component.ios.js and component.android.js
 
 // import Component from  './components/component' }
-//var request = new XMLHttpRequest();
 
 fetch('http://localhost:3000/trends').then(response => response.json()).then(res => console.log(res));
 
