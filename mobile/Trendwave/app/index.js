@@ -31,7 +31,8 @@ export default class Trendwave extends Component {
     super(props);
 
     this.state = {
-      popTweets: []
+      popTweets: null,
+      popHeadlines: null
     };
   }
 
@@ -64,15 +65,34 @@ export default class Trendwave extends Component {
       // })
       // .catch(err => console.log('err:', err));
     // *** end of logic for popTweets
+
+    // *** start of logic for popHeadlines
+    // fb seed data for dev
+    var summary = {
+      summary: 'Mostly Surprised',
+      topHeadline: 'topArticle.title',
+      secondHeadline: 'secondArticle.title',
+      likes: 30,
+      loves: 20,
+      wows: 20,
+      hahas: 10,
+      sads: 13,
+      angrys: 7
+    };
+
+    this.setState({
+      popHeadlines: summary
+    });
+    // *** end of logic for popHeadlines
   }
 
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView>
         <Text>TrendWave</Text>
         <PieChart />
-        <PopTweets popTweets={this.state.popTweets}/>
-        <PopHeadlines />
+        <PopTweets popTweets={this.state.popTweets} />
+        <PopHeadlines topHeadline={this.state.popHeadlines.topHeadline} secondHeadline={this.state.popHeadlines.secondHeadline} />
         <TrendScore />
         <EmotionalFeedback />
         {/*<Component>*/}
@@ -82,12 +102,3 @@ export default class Trendwave extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // height: 1000
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center'
-  }
-});
