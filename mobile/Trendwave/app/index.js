@@ -96,7 +96,7 @@ export default class Trendwave extends Component {
     return (
       <ScrollView style={styles.container}>
         <Text>TrendWave</Text>
-        <PieChart />
+        <PieChart styles={styles.chart} />
         <PopTweets popTweets={this.state.popTweets}/>
         <PopHeadlines />
         <TrendScore />
@@ -111,10 +111,7 @@ export default class Trendwave extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    // height: 1000
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center'
-  }
+  // chart: {
+  //   flex: 1
+  // }
 });

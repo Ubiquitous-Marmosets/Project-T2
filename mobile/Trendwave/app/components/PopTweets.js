@@ -24,7 +24,7 @@ export default class PopTweets extends Component {
     this.state = {
       firstTweet: '',
       secondTweet: ''
-    }
+    };
   }
 
   componentWillMount() {
@@ -56,7 +56,7 @@ export default class PopTweets extends Component {
 var styles = StyleSheet.create({
   header: {
     backgroundColor: '#33ccff',
-    paddingTop: 30,
+    paddingTop: 20,
     paddingBottom: 10,
   },
   headerTitle: {
@@ -69,6 +69,9 @@ var styles = StyleSheet.create({
     borderRightWidth: 5,
     borderBottomWidth: 5,
     borderColor: '#33ccff',
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
   },
   content: {
     fontSize: 10,
