@@ -57,7 +57,7 @@ class Dashboard extends React.Component {
     this.getTrends();
     this.updateChart(this.state.twitterData, '#sentimentChart');
     // this.updateChart(this.state.twitterData, '#sentimentChart');
-    // this.updateDonutChart(this.state.facebookData);
+    this.updateDonutChart(this.state.facebookData);
     // setInterval(this.getTrends.bind(this), 3000);
   }
 
