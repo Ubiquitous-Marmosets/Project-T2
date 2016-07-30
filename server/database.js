@@ -18,6 +18,7 @@ var Twitter_Sentiments = sequelize.define('Twitter_Sentiments', {
 
 // Table to storing articles from news sources and their emotional reactions on Facebook
 var FB_Sentiments = sequelize.define('FB_Sentiments', {
+  page_name: Sequelize.STRING,
   status_id: Sequelize.STRING,
   status_message: Sequelize.STRING(2000),
   link_name: Sequelize.STRING,
@@ -33,8 +34,6 @@ var FB_Sentiments = sequelize.define('FB_Sentiments', {
   num_hahas: Sequelize.INTEGER,
   num_sads: Sequelize.INTEGER,
   num_angrys: Sequelize.INTEGER
-}, {
-   timestamps: false
 });
 
 FB_Sentiments.removeAttribute('id');
