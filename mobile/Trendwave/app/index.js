@@ -73,11 +73,11 @@ export default class Trendwave extends Component {
       <ScrollView style={styles.container}>
         <Text>TrendWave</Text>
         <PieChart />
+        <BarChart query={'Hillary Clinton'}/>
         <PopTweets popTweets={this.state.popTweets}/>
         <PopHeadlines />
         <TrendScore />
         <EmotionalFeedback />
-        <BarChart query={'Hillary Clinton'}/>
         {/*<Component>*/}
         {/*<Component>*/}
         {/*<Component>*/}

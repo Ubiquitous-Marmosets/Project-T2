@@ -17,8 +17,8 @@ var Example = React.createClass({
     return {
       index: 0,
       types: ['CircleFlip', 'Bounce', 'Wave', 'WanderingCubes', 'Pulse', 'ChasingDots', 'ThreeBounce', 'Circle', '9CubeGrid', 'WordPress', 'FadingCircle', 'FadingCircleAlt', 'Arc', 'ArcAlt'],
-      size: 100,
-      color: "#FFFFFF",
+      size: 60,
+      color: "#D9853B",
     }
   },
 
@@ -51,10 +51,10 @@ var Example = React.createClass({
 
 var styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#6DBDD6',
+    backgroundColor: '#33ccff'
   },
 });
 

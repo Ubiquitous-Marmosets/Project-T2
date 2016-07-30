@@ -10,7 +10,8 @@ class BarChart extends React.Component {
     this.state = {
       ready: false,
       positive: 50,
-      negative: 50
+      negative: 50,
+      sentiment: ''
     }
   }
 
@@ -46,34 +47,68 @@ class BarChart extends React.Component {
   render() {
 
     return (
-      <View style={{flex: 1}}>
-        <View style={styles.container}>
-          <Text> {this.state.sentiment} </Text>
+
+      <View style={styles.mainContainer}>
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>SENTIMENT ANALYSIS</Text>
+          <Text style={styles.headerTitle}>{this.state.sentiment.toUpperCase() || ''}</Text>
         </View>
-        <View style={{flex: 2, flexDirection: 'row'}}>
-          {this.state.ready && <View style={{flex: this.state.positive, backgroundColor: '#005A31', justifyContent: 'center', alignItems: 'center'}}>
-                                <Text style={styles.box}> {this.state.positive}</Text>
-                               </View>
-          }
-          {this.state.ready && <View style={{flex: this.state.negative, backgroundColor: '#B71427', justifyContent: 'center', alignItems: 'center'}}>
-                                <Text style={styles.box}> {this.state.negative}</Text>
-                               </View>
-          }
-          {!this.state.ready && <Spin />}
+        <View>
+          <View style={{flex: 1}}>
+            <View style={{flex: 1, flexDirection: 'row'}}>
+              {this.state.ready &&
+                <View style={{flex: this.state.positive, backgroundColor: '#005A31', justifyContent: 'center', alignItems: 'center'}}>
+                  <Text style={styles.box}> {this.state.positive}</Text>
+                </View>
+              }
+              {this.state.ready &&
+                <View style={{flex: this.state.negative, backgroundColor: '#B71427', justifyContent: 'center', alignItems: 'center'}}>
+                  <Text style={styles.box}> {this.state.negative}</Text>
+                </View>
+              }
+              {!this.state.ready && <Spin />}
+            </View>
+          </View>
         </View>
       </View>
+
     );
   }
 }
 
 const styles = StyleSheet.create({
+  header: {
+    backgroundColor: '#33ccff',
+    paddingTop: 30,
+    paddingBottom: 10,
+  },
+  headerTitle: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  mainContainer: {
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    borderLeftWidth: 5,
+    borderRightWidth: 5,
+    borderBottomWidth: 5,
+    borderColor: '#33ccff',
+  },
+  content: {
+    fontSize: 10,
+    flex: 1,
+    margin: 10,
+    textAlign: 'center'
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   box: {
-    fontSize: 25,
+    fontSize: 20,
     color: 'white',
     justifyContent: 'center',
     alignItems: 'center',
