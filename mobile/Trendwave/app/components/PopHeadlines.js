@@ -13,8 +13,8 @@ export default class PopHeadlines extends Component {
           <Text style={styles.headerTitle}>MOST POPULAR HEADLINES</Text>
         </View>
         <View>
-          <Text style={styles.content}>{this.props.topHeadline}</Text>
-          <Text style={styles.content}>{this.props.secondHeadline}</Text>
+          <Text style={styles.content}>{this.props.headlines.topHeadline}</Text>
+          <Text style={styles.content}>{this.props.headlines.secondHeadline}</Text>
         </View>
       </View>
     );
@@ -40,10 +40,13 @@ var styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 10,
     marginRight: 10,
-    flex: 1
+    borderRadius: 5
   },
   content: {
+    fontSize: 10,
+    flex: 1,
     margin: 10,
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingBottom: 10
   }
 });

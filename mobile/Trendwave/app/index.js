@@ -10,6 +10,7 @@ import EmotionalFeedback from './components/EmotionalFeedback';
 import Sentiment from './components/sentiment';
 import Menu from './components/Menu';
 import moment from 'moment';
+import TrendBar from './components/trendbar';
 
 
 export default class Trendwave extends Component {
@@ -20,7 +21,12 @@ export default class Trendwave extends Component {
       popTweets: ['schwag'],
       selectedTrend: 'Stephen Curry',
       trends:[],
-      menuOpen: false
+      menuOpen: false,
+      fbData: {},
+      headlines: {
+        topHeadline: 'topHeadline',
+        secondHeadline: 'secondHeadline'
+      }
     };
   }
 
@@ -29,7 +35,8 @@ export default class Trendwave extends Component {
     .then(response => response.json())
     .then(res => {
       this.setState({trends:res});
-    });
+    })
+    .catch(error => console.log('Get Trends Error:', error));
   }
 
   fetchTrend(trend) {
@@ -55,7 +62,8 @@ export default class Trendwave extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ q: trend})
-    }).then(res => res.json())
+    })
+    .then(res => res.json())
     .then(response => {
       let firstTweet = `${response.firstUser}: ${response.firstTweet} \n ${moment(response.firstTweetTime).fromNow()}`;
       let secondTweet = `${response.secondUser}: ${response.secondTweet} \n ${moment(response.secondTweetTime).fromNow()}`;
@@ -63,10 +71,37 @@ export default class Trendwave extends Component {
         popTweets: {
           firstTweet: firstTweet,
           secondTweet: secondTweet
-          }
+        }
       });
     })
-    .catch(response => console.log('Top Tweet Grab Error:', response));
+    .catch(response => console.log('Top Tweet Grab Error:', response))
+    .then(() => {
+      fetch('http://localhost:3000/grabFbook', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ q: trend})
+      })
+      .then(res => res.json())
+      .then(res => this.setState(
+        {
+          headlines: {
+            topHeadline: res.topHeadline,
+            secondHeadline: res.secondHeadline
+          },
+          fbSentiment: {
+            likes: res.likes,
+            loves: res.loves,
+            wows: res.wows,
+            hahas: res.hahas,
+            sads: res.sads,
+            angries: res.angrys
+          }
+        })
+      );
+    });
   }
 
 
@@ -75,11 +110,12 @@ export default class Trendwave extends Component {
 
     return (
         <SideMenu menu={menu}>
-        <StatusBar hidden= 'true' />
+          <StatusBar hidden= {true} />
+          <TrendBar selectedTrend={this.state.selectedTrend} />
           <ScrollView style={styles.container}>
-            <PieChart styles={styles.chart} />
+            <PieChart fbData={this.state.fbData} />
             <PopTweets popTweets={this.state.popTweets} selectedTrend={this.state.selectedTrend}/>
-            <PopHeadlines />
+            <PopHeadlines headlines={this.state.headlines} />
             <TrendScore />
             <EmotionalFeedback />
             <Sentiment />
