@@ -50,20 +50,20 @@ class BarChart extends React.Component {
 
       <View style={styles.mainContainer}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>SENTIMENT ANALYSIS</Text>
+          <Text style={styles.headerTitle}>SENTIMENT ANALYSIS:</Text>
           <Text style={styles.headerTitle}>{this.state.sentiment.toUpperCase() || ''}</Text>
         </View>
         <View>
           <View style={{flex: 1}}>
             <View style={{flex: 1, flexDirection: 'row'}}>
               {this.state.ready &&
-                <View style={{flex: this.state.positive, backgroundColor: '#005A31', justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={styles.box}> {this.state.positive}</Text>
+                <View style={{flex: this.state.positive, backgroundColor: '#005A31', justifyContent: 'center', alignItems: 'center', height: 33}}>
+                  <Text style={styles.box}> {this.state.positive}%</Text>
                 </View>
               }
               {this.state.ready &&
-                <View style={{flex: this.state.negative, backgroundColor: '#B71427', justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={styles.box}> {this.state.negative}</Text>
+                <View style={{flex: this.state.negative, backgroundColor: '#B71427', justifyContent: 'center', alignItems: 'center', height: 33}}>
+                  <Text style={styles.box}> {this.state.negative}%</Text>
                 </View>
               }
               {!this.state.ready && <Spin />}
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   box: {
-    fontSize: 20,
+    fontSize: 15,
     color: 'white',
     justifyContent: 'center',
     alignItems: 'center',
