@@ -5,7 +5,6 @@ import SideMenu from 'react-native-side-menu';
 import PieChart from './components/PieChart';
 import PopTweets from './components/PopTweets';
 import PopHeadlines from './components/PopHeadlines';
-import TrendScore from './components/TrendScore';
 import EmotionalFeedback from './components/EmotionalFeedback';
 import Sentiment from './components/sentiment';
 import Menu from './components/Menu';
@@ -22,15 +21,21 @@ export default class Trendwave extends Component {
       selectedTrend: 'Stephen Curry',
       trends:[],
       menuOpen: false,
-      fbData: {},
+      fbData: [[0, 1]],
       headlines: {
-        topHeadline: 'topHeadline',
-        secondHeadline: 'secondHeadline'
+        topHeadline: 'No Data',
+        secondHeadline: 'Select a trend from the side menu'
+      },
+      barChartData: {
+        ready: false,
+        positive: 50,
+        negative: 50,
+        sentiment: ''
       }
     };
   }
 
-  componentWillMount(){
+  componentWillMount() {
     fetch('http://localhost:3000/trends')
     .then(response => response.json())
     .then(res => {
@@ -42,41 +47,37 @@ export default class Trendwave extends Component {
   fetchTrend(trend) {
     this.setState({menuOpen: false, selectedTrend: trend});
     //Sentiment analysis
-    // fetch('http://localhost:3000/grabTweets', {
-    //   method: "POST",
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ q: trend })//q })
-    // })
-    // .then(res => res.json())
-    // .then(response => this.setState({popTweets: response, selectedTrend: trend}))
-    // .then(() =>)
-    // .catch(err => console.log('err:', err));
-    // 
-    fetch('http://localhost:3000/grabTopTweet', {
-      method: 'POST',
+    fetch('http://localhost:3000/grabTweets', {
+      method: "POST",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ q: trend})
+      body: JSON.stringify({ q: trend })
     })
     .then(res => res.json())
-    .then(response => {
-      let firstTweet = `${response.firstUser}: ${response.firstTweet} \n ${moment(response.firstTweetTime).fromNow()}`;
-      let secondTweet = `${response.secondUser}: ${response.secondTweet} \n ${moment(response.secondTweetTime).fromNow()}`;
-      this.setState({
-        popTweets: {
-          firstTweet: firstTweet,
-          secondTweet: secondTweet
-        }
-      });
+    .then(data => {
+
+
+      var positiveScore = Math.floor(data.positive * 100);
+      var negativeScore = Math.floor(data.negative * 100);
+
+      console.log('11111111111', positiveScore);
+
+      if ((positiveScore + negativeScore) !== 100) {
+        positiveScore += 1;
+      }
+
+      this.setState({ barChartData: {
+        sentiment: data.summary,
+        positive: positiveScore,
+        negative: negativeScore,
+        ready: true
+      }});
     })
-    .catch(response => console.log('Top Tweet Grab Error:', response))
+    .catch(err => console.log('GrabTweets error: ', err))
     .then(() => {
-      fetch('http://localhost:3000/grabFbook', {
+      fetch('http://localhost:3000/grabTopTweet', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -85,22 +86,44 @@ export default class Trendwave extends Component {
         body: JSON.stringify({ q: trend})
       })
       .then(res => res.json())
-      .then(res => this.setState(
-        {
-          headlines: {
-            topHeadline: res.topHeadline,
-            secondHeadline: res.secondHeadline
-          },
-          fbSentiment: {
-            likes: res.likes,
-            loves: res.loves,
-            wows: res.wows,
-            hahas: res.hahas,
-            sads: res.sads,
-            angries: res.angrys
+      .then(response => {
+        let firstTweet = `${response.firstUser}: ${response.firstTweet} \n ${moment(response.firstTweetTime).fromNow()}`;
+        let secondTweet = `${response.secondUser}: ${response.secondTweet} \n ${moment(response.secondTweetTime).fromNow()}`;
+        this.setState({
+          popTweets: {
+            firstTweet: firstTweet,
+            secondTweet: secondTweet
           }
+        });
+      })
+      .catch(response => console.log('Top Tweet Grab Error:', response))
+      .then(() => {
+        fetch('http://localhost:3000/grabFbook', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ q: trend})
         })
-      );
+        .then(res => res.json())
+        .then(res => this.setState(
+          {
+            headlines: {
+              topHeadline: res.topHeadline,
+              secondHeadline: res.secondHeadline
+            },
+            fbData: [
+              [0, res.loves],
+              [1, res.wows],
+              [2, res.hahas],
+              [3, res.sads],
+              [4, res.angrys]
+            ]
+          })
+        )
+        .catch(err => console.log('Grab Fbook Error:', err)); 
+      });
     });
   }
 
@@ -116,12 +139,7 @@ export default class Trendwave extends Component {
             <PieChart fbData={this.state.fbData} />
             <PopTweets popTweets={this.state.popTweets} selectedTrend={this.state.selectedTrend}/>
             <PopHeadlines headlines={this.state.headlines} />
-            <TrendScore />
-            <EmotionalFeedback />
-            <Sentiment />
-            {/*<Component>*/}
-            {/*<Component>*/}
-            {/*<Component>*/}
+            <Sentiment data={this.state.barChartData} />
           </ScrollView>
         </SideMenu>
     );
