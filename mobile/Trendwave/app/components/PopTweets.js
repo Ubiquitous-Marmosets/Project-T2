@@ -18,36 +18,14 @@ import {
 */
 
 export default class PopTweets extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      firstTweet: '',
-      secondTweet: ''
-    }
-  }
-
-  componentWillMount() {
-    let tweetObj = this.props.popTweets;
-    let firstTweet = `${this.props.popTweets.firstUser}: ${this.props.popTweets.firstTweet} \n ${this.props.popTweets.firstTweetTime}`;
-    let secondTweet = `${this.props.popTweets.secondUser}: ${this.props.popTweets.secondTweet} \n ${this.props.popTweets.secondTweetTime}`;
-
-    this.setState({
-      firstTweet: firstTweet,
-      secondTweet: secondTweet
-    });
-  }
-
-  render() {
+  render() {;
     return (
       <View style={styles.mainContainer}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>MOST POPULAR TWEETS</Text>
-        </View>
-        <View>
-          <Text style={styles.content}>{this.state.firstTweet}</Text>
-          <Text style={styles.content}>{this.state.secondTweet}</Text>
-        </View>
+      </View>
+        <Text style={styles.content}>{this.props.popTweets.firstTweet}</Text>
+        <Text style={styles.content}>{this.props.popTweets.secondTweet}</Text>
       </View>
     );
   }
@@ -56,7 +34,7 @@ export default class PopTweets extends Component {
 var styles = StyleSheet.create({
   header: {
     backgroundColor: '#33ccff',
-    paddingTop: 30,
+    paddingTop: 20,
     paddingBottom: 10,
   },
   headerTitle: {
@@ -69,13 +47,20 @@ var styles = StyleSheet.create({
     borderRightWidth: 5,
     borderBottomWidth: 5,
     borderColor: '#33ccff',
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10
   },
   content: {
     fontSize: 10,
     flex: 1,
     margin: 10,
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+    paddingBottom: 10,
+  },
+  // contentWrapper: {
+  //   flex: 1
+  // }
 });
 
 

@@ -5,12 +5,12 @@ import {
   View
 } from 'react-native';
 
-export default class PopHeadlines extends Component {
+export default class Sentiment extends Component {
   render() {
     return (
       <View style={styles.mainContainer}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>MOST POPULAR HEADLINES</Text>
+          <Text style={styles.headerTitle}>Sentiment</Text>
         </View>
         <View>
           <Text style={styles.content}>Content Goes Here</Text>
