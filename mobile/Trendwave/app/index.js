@@ -67,7 +67,6 @@ export default class Trendwave extends Component {
     // *** end of logic for popTweets
       query: 'San Diego'
     };
-  }
 
   render() {
     return (
@@ -78,7 +77,7 @@ export default class Trendwave extends Component {
         <PopHeadlines />
         <TrendScore />
         <EmotionalFeedback />
-        <BarChart query={this.state.query}/>
+        <BarChart query={'Hillary Clinton'}/>
         {/*<Component>*/}
         {/*<Component>*/}
         {/*<Component>*/}

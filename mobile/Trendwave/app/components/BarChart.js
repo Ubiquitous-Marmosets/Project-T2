@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-//var Spinner = require('react-native-spinkit');
-
 import Spin from './Spinner';
 
 class BarChart extends React.Component {
@@ -11,8 +9,8 @@ class BarChart extends React.Component {
 
     this.state = {
       ready: false,
-      positive: 20,
-      negative: 80
+      positive: 50,
+      negative: 50
     }
   }
 
@@ -31,6 +29,10 @@ class BarChart extends React.Component {
 
       var positiveScore = Math.floor(data.positive * 100);
       var negativeScore = Math.floor(data.negative * 100);
+
+      if ((positiveScore + negativeScore) !== 100) {
+        positiveScore += 1;
+      }
 
       this.setState({
         sentiment: data.summary,
@@ -62,7 +64,6 @@ class BarChart extends React.Component {
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({

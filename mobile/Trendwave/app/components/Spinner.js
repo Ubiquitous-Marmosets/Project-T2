@@ -19,7 +19,6 @@ var Example = React.createClass({
       types: ['CircleFlip', 'Bounce', 'Wave', 'WanderingCubes', 'Pulse', 'ChasingDots', 'ThreeBounce', 'Circle', '9CubeGrid', 'WordPress', 'FadingCircle', 'FadingCircleAlt', 'Arc', 'ArcAlt'],
       size: 100,
       color: "#FFFFFF",
-      isVisible: true
     }
   },
 
@@ -40,10 +39,7 @@ var Example = React.createClass({
 
     return (
       <View style={styles.container}>
-        <Text> Calculating... </Text>
         <Spinner
-          style={styles.spinner}
-          isVisible={this.state.isVisible}
           size={this.state.size}
           type={'ThreeBounce'}
           color={this.state.color}/>
@@ -58,17 +54,8 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#d35400',
-  },
-
-  spinner: {
-    marginBottom: 50
-  },
-
-  btn: {
-    marginTop: 20
+    backgroundColor: '#6DBDD6',
   },
 });
 
 export default Example;
-//AppRegistry.registerComponent('Example', () => Example);
