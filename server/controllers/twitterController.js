@@ -149,7 +149,8 @@ module.exports = {
     // Searh for 'popular' tweets
     grabTweets.get('search/tweets', {q: query, count: 3, result_type: 'popular', lang: 'en'}, function(error, tweets) {
       if (error) {
-        throw error
+        console.log('Error: ', error.message);
+        throw error;
       } else {
 
         // Calculate time of tweets
@@ -161,10 +162,13 @@ module.exports = {
         res.json({
           firstUser: tweets.statuses[0].user.screen_name,
           firstTweet: tweets.statuses[0].text,
-          firstTweetTime: firstTweetTime,
+          // firstTweetTime: firstTweetTime,
+          firstTweetTime: tweets.statuses[0].created_at,
           secondUser: tweets.statuses[1].user.screen_name,
           secondTweet: tweets.statuses[1].text,
-          secondTweetTime: secondTweetTime});
+          // secondTweetTime: secondTweetTime
+          secondTweetTime: tweets.statuses[1].created_at
+        });
       }
     });
   }
