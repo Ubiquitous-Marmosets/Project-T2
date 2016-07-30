@@ -69,6 +69,43 @@ export default class Trendwave extends Component {
     .catch(response => console.log('Top Tweet Grab Error:', response));
   }
 
+  fetchTrend(trend) {
+    this.setState({menuOpen: false, selectedTrend: trend});
+    //Sentiment analysis
+    // fetch('http://localhost:3000/grabTweets', {
+    //   method: "POST",
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ q: trend })//q })
+    // })
+    // .then(res => res.json())
+    // .then(response => this.setState({popTweets: response, selectedTrend: trend}))
+    // .then(() =>)
+    // .catch(err => console.log('err:', err));
+    // 
+    fetch('http://localhost:3000/grabTopTweet', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ q: trend})
+    }).then(res => res.json())
+    .then(response => {
+      let firstTweet = `${response.firstUser}: ${response.firstTweet} \n ${moment(response.firstTweetTime).fromNow()}`;
+      let secondTweet = `${response.secondUser}: ${response.secondTweet} \n ${moment(response.secondTweetTime).fromNow()}`;
+      this.setState({
+        popTweets: {
+          firstTweet: firstTweet,
+          secondTweet: secondTweet
+          }
+      });
+    })
+    .catch(response => console.log('Top Tweet Grab Error:', response));
+  }
+
 
   render() {
     const menu = <Menu isOpen={this.state.menuOpen} fetchTrend={this.fetchTrend.bind(this)} trends={this.state.trends}/>;
