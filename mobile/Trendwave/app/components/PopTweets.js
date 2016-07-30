@@ -4,7 +4,7 @@ import {
   Text,
   View
 } from 'react-native';
-
+import moment from 'moment';
 /*
 
 { firstUser: 'sbstryker',
@@ -23,19 +23,37 @@ export default class PopTweets extends Component {
 
     this.state = {
       firstTweet: '',
-      secondTweet: ''
+      secondTweet: '',
+      query: 'Stephen Curry'
     };
   }
 
-  componentWillMount() {
-    let tweetObj = this.props.popTweets;
-    let firstTweet = `${this.props.popTweets.firstUser}: ${this.props.popTweets.firstTweet} \n ${this.props.popTweets.firstTweetTime}`;
-    let secondTweet = `${this.props.popTweets.secondUser}: ${this.props.popTweets.secondTweet} \n ${this.props.popTweets.secondTweetTime}`;
+  componentDidMount() {
 
-    this.setState({
-      firstTweet: firstTweet,
-      secondTweet: secondTweet
-    });
+    fetch('http://localhost:3000/grabTopTweet', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ q: this.state.query})
+    }).then(res => res.json())
+    .then(response => {
+      let firstTweet = `${response.firstUser}: ${response.firstTweet} \n ${moment(response.firstTweetTime).fromNow()}`;
+      let secondTweet = `${response.secondUser}: ${response.secondTweet} \n ${moment(response.secondTweetTime).fromNow()}`;
+      this.setState({
+        firstTweet: firstTweet,
+        secondTweet: secondTweet
+      });
+    })
+    .then(() => {
+
+      console.log('State Poptweets:', this.state);
+    })
+    .catch(response => console.log('Top Tweet Grab Error:', response));
+
+   
+    console.log('PopTweets props: ', this.props);
   }
 
   render() {
@@ -43,11 +61,9 @@ export default class PopTweets extends Component {
       <View style={styles.mainContainer}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>MOST POPULAR TWEETS</Text>
-        </View>
-        <View>
-          <Text style={styles.content}>{this.state.firstTweet}</Text>
-          <Text style={styles.content}>{this.state.secondTweet}</Text>
-        </View>
+      </View>
+        <Text style={styles.content}>{this.state.firstTweet}</Text>
+        <Text style={styles.content}>{this.state.secondTweet}</Text>
       </View>
     );
   }
@@ -71,14 +87,18 @@ var styles = StyleSheet.create({
     borderColor: '#33ccff',
     marginTop: 10,
     marginLeft: 10,
-    marginRight: 10,
+    marginRight: 10
   },
   content: {
     fontSize: 10,
     flex: 1,
     margin: 10,
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+    paddingBottom: 10,
+  },
+  // contentWrapper: {
+  //   flex: 1
+  // }
 });
 
 
