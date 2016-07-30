@@ -11,11 +11,6 @@ import Sentiment from './components/sentiment';
 import Menu from './components/Menu';
 import moment from 'moment';
 
-// Here we can use import statesments using the
-// naming convention component.ios.js and component.android.js
-
-// import Component from  './components/component' }
-
 
 export default class Trendwave extends Component {
   constructor(props) {
@@ -68,7 +63,7 @@ export default class Trendwave extends Component {
         popTweets: {
           firstTweet: firstTweet,
           secondTweet: secondTweet
-        }
+          }
       });
     })
     .catch(response => console.log('Top Tweet Grab Error:', response));
