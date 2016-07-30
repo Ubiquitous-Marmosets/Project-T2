@@ -7,6 +7,8 @@ import PopHeadlines from './components/PopHeadlines';
 import TrendScore from './components/TrendScore';
 import EmotionalFeedback from './components/EmotionalFeedback';
 
+import BarChart from './components/BarChart';
+
 // Here we can use import statesments using the
 // naming convention component.ios.js and component.android.js
 
@@ -16,15 +18,14 @@ fetch('http://localhost:3000/trends').then(response => response.json())
   .then(res => console.log('/trends',res))
   .catch(err => console.log('err:', err));
 
-fetch('http://localhost:3000/grabTweets', {
-  method: "POST",
+fetch('http://localhost:3000/grabTopTweet', {
+  method: 'POST',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({ q: 'Donald Trump' })//q })
-}).then(res => res.json()).then(response => console.log('/grabTweets', response))
-.catch(err => console.log('err:', err));
+  body: JSON.stringify({ q: 'Hillary Clinton'})
+}).then(res => res.json()).then(response => console.log(response));
 
 export default class Trendwave extends Component {
   constructor(props) {
@@ -64,6 +65,8 @@ export default class Trendwave extends Component {
       // })
       // .catch(err => console.log('err:', err));
     // *** end of logic for popTweets
+      query: 'San Diego'
+    };
   }
 
   render() {
@@ -75,6 +78,7 @@ export default class Trendwave extends Component {
         <PopHeadlines />
         <TrendScore />
         <EmotionalFeedback />
+        <BarChart query={this.state.query}/>
         {/*<Component>*/}
         {/*<Component>*/}
         {/*<Component>*/}
@@ -85,9 +89,6 @@ export default class Trendwave extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // height: 1000
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center'
+    flex: 1
   }
 });
