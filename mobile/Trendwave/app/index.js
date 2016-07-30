@@ -34,6 +34,7 @@ export default class Trendwave extends Component {
 
   fetchTrend(trend) {
     this.setState({menuOpen: false, selectedTrend: trend});
+    //Sentiment analysis
     // fetch('http://localhost:3000/grabTweets', {
     //   method: "POST",
     //   headers: {
@@ -91,10 +92,7 @@ export default class Trendwave extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  // sideMenu:{
-  //   backgroundColor: '#33ccff'
-  // },
+const styles = StyleSheet.create({  
   container: {
     backgroundColor: 'white'
   }
