@@ -29,19 +29,6 @@ import { StyleSheet, View } from 'react-native';
 
 import Chart from 'react-native-chart';
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-    },
-    chart: {
-        width: 250,
-        height: 200,
-    },
-});
-
 /*
   Ubi Marms: How to use this component
   The X coordinate indicates only a new data point:
@@ -60,18 +47,33 @@ const data = [
 ];
 
 class SimpleChart extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Chart
-                    style={styles.chart}
-                    data={data}
-                    type="pie"
-                    showAxis={false}
-                 />
-            </View>
-        );
-    }
+  render() {
+    return (
+      <View style={styles.container}>
+          <Chart
+              style={styles.chart}
+              data={data}
+              type="pie"
+              showAxis={false}
+           />
+      </View>
+    );
+  }
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    margin: 10
+    },
+    chart: {
+      width: 250,
+      height: 250,
+    },
+});
 
 export default SimpleChart;
