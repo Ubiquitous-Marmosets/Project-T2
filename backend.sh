@@ -5,4 +5,4 @@ docker run --rm -it \
   -v $(pwd):/usr/src \
   -p 3000:3000 \
   t2 \
-  npm start
+  ${@-npm start}
