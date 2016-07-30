@@ -49,7 +49,8 @@ var styles = StyleSheet.create({
     borderColor: '#33ccff',
     marginTop: 10,
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
+    borderRadius: 5
   },
   content: {
     fontSize: 10,
@@ -63,9 +64,3 @@ var styles = StyleSheet.create({
   // }
 });
 
-
-/*
-
-{this.props.popTweets.firstUser}: {this.props.popTweets.firstTweet} {this.props.popTweets.firstTweetTime}
-
-*/

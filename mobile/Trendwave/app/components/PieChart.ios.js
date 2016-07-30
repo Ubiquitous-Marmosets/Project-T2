@@ -38,21 +38,25 @@ import Chart from 'react-native-chart';
   Therefore, the above example is a three slice pie chart of equal portions.
 */
 
-const data = [
-    [0, 1],
-    [1, 2],
-    [2, 3],
-    [3, 4],
-    [4, 5],
-];
 
-class SimpleChart extends Component {
+export default class SimpleChart extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   data = [
+  //     [0, this.props.fbData.loves],
+  //     [1, this.props.fbData.wows],
+  //     [2, this.props.fbData.hahas],
+  //     [3, this.props.fbData.sads],
+  //     [4, this.props.fbData.angries],
+  //   ];
+  // }
+
   render() {
     return (
       <View style={styles.container}>
           <Chart
               style={styles.chart}
-              data={data}
+              data={this.props.fbData}
               type="pie"
               showAxis={false}
            />
@@ -69,11 +73,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     margin: 10
-    },
-    chart: {
-      width: 250,
-      height: 250,
-    },
+  },
+  chart: {
+    width: 250,
+    height: 250,
+  },
 });
 
 export default SimpleChart;

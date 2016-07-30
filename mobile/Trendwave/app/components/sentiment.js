@@ -4,16 +4,17 @@ import {
   Text,
   View
 } from 'react-native';
+import BarChart from './barchart';
 
 export default class Sentiment extends Component {
   render() {
     return (
       <View style={styles.mainContainer}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>Sentiment</Text>
+          <Text style={styles.headerTitle}>SENTIMENT</Text>
         </View>
         <View>
-          <Text style={styles.content}>Content Goes Here</Text>
+          <BarChart data={this.props.data} />
         </View>
       </View>
     );
@@ -41,7 +42,8 @@ var styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 10,
     marginRight: 10,
-    flex: 1
+    flex: 1,
+    borderRadius: 5
   },
   content: {
     margin: 10,
