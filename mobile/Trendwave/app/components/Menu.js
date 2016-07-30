@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, TouchableHighlight} from 'react-native';
 
 export default class Menu extends Component {
+
   render() {
     return (
       <ScrollView style={styles.scrollView}>
-        {this.props.trends.map(item => <View style={styles.contentView}><Text style={styles.content}>{item.toUpperCase()}</Text></View>)}
+        {this.props.trends.map(item => {
+          return <View style={styles.contentView}>
+                    <Text style={styles.content} 
+                        onPress={() => this.props.fetchTrend(item)}>
+                      {item.toUpperCase()}
+                    </Text>
+                  </View>;
+                 
+        })}
       </ScrollView>
     );
   }

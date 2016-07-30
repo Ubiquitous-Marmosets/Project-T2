@@ -4,7 +4,7 @@ import {
   Text,
   View
 } from 'react-native';
-import moment from 'moment';
+
 /*
 
 { firstUser: 'sbstryker',
@@ -18,52 +18,15 @@ import moment from 'moment';
 */
 
 export default class PopTweets extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      firstTweet: '',
-      secondTweet: '',
-      query: 'Stephen Curry'
-    };
-  }
-
-  componentDidMount() {
-
-    fetch('http://localhost:3000/grabTopTweet', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ q: this.state.query})
-    }).then(res => res.json())
-    .then(response => {
-      let firstTweet = `${response.firstUser}: ${response.firstTweet} \n ${moment(response.firstTweetTime).fromNow()}`;
-      let secondTweet = `${response.secondUser}: ${response.secondTweet} \n ${moment(response.secondTweetTime).fromNow()}`;
-      this.setState({
-        firstTweet: firstTweet,
-        secondTweet: secondTweet
-      });
-    })
-    .then(() => {
-
-      console.log('State Poptweets:', this.state);
-    })
-    .catch(response => console.log('Top Tweet Grab Error:', response));
-
-   
-    console.log('PopTweets props: ', this.props);
-  }
-
   render() {
+    console.log('poptweets This.props.trend render:', this.props);
     return (
       <View style={styles.mainContainer}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>MOST POPULAR TWEETS</Text>
       </View>
-        <Text style={styles.content}>{this.state.firstTweet}</Text>
-        <Text style={styles.content}>{this.state.secondTweet}</Text>
+        <Text style={styles.content}>{this.props.popTweets.firstTweet}</Text>
+        <Text style={styles.content}>{this.props.popTweets.secondTweet}</Text>
       </View>
     );
   }
