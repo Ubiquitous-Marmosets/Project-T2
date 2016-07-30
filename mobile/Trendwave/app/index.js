@@ -62,7 +62,7 @@ export default class Trendwave extends Component {
         popTweets: {
           firstTweet: firstTweet,
           secondTweet: secondTweet
-        }
+          }
       });
     })
     .catch(response => console.log('Top Tweet Grab Error:', response));

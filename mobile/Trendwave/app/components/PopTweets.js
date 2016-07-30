@@ -18,8 +18,7 @@ import {
 */
 
 export default class PopTweets extends Component {
-  render() {
-    console.log('poptweets This.props.trend render:', this.props);
+  render() {;
     return (
       <View style={styles.mainContainer}>
         <View style={styles.header}>
