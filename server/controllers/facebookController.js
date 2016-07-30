@@ -5,7 +5,7 @@ var db = require('../database');
 
 
 module.exports = {
-	
+
 	grabFbook: function(req, res) {
 
 		// Get the first two keywords of the trend name
@@ -18,12 +18,18 @@ module.exports = {
 			} else if (index === 1) {
 				twoKeywords += ' ' + item
 			}
-		})
+		});
 
 		// Search the database for articles that contain the selected trend
-		// Specifically, search is performed on the FB_Sentiments table in MySQL using the first two key words of a trend name
-		db.FB_Sentiments.findAll({where: {status_message: {like: '%' + twoKeywords + '%'}}}).then(function(data) {
-			
+		// Specifically, search is performed on the FB_Sentiments table in MySQL
+    // using the first two key words of a trend name
+		db.FB_Sentiments.findAll({
+      where: {
+        status_message: {like: '%' + twoKeywords + '%'}
+      }
+    })
+    .then(function(data) {
+
 			// Declare all the variables we will want to send back to the client side
 			var num_likes = 0;
 			var num_loves = 0
@@ -33,7 +39,7 @@ module.exports = {
 			var num_angrys = 0;
 			var counter = data.length;
 
-			// Iterate through the data object and tally up all of the respective reactions 
+			// Iterate through the data object and tally up all of the respective reactions
 			for (var i = 0; i < data.length; i++) {
 				num_likes += data[i].dataValues.num_likes;
 				num_loves += data[i].dataValues.num_loves;
@@ -78,11 +84,17 @@ module.exports = {
 					topArticle.likes = item.dataValues.num_likes;
 					topArticle.link = item.dataValues.status_link;
 				}
-			})
+			});
 
-			// Find the most dominant facebook reaction			
-
-			var tempReactions = [[0, 'N/A'], [num_wows, 'Mostly Surprised'], [num_hahas, 'Mostly Amused'], [num_sads, 'Mostly Sad'], [num_angrys, 'Mostly Angry'], [num_loves, 'Mostly Loved']];
+			// Find the most dominant facebook reaction
+			var tempReactions = [
+        [0, 'N/A'],
+        [num_wows, 'Mostly Surprised'],
+        [num_hahas, 'Mostly Amused'],
+        [num_sads, 'Mostly Sad'],
+        [num_angrys, 'Mostly Angry'],
+        [num_loves, 'Mostly Loved']
+      ];
 
 			tempReactions = tempReactions.sort(function(a,b) {
 				if (a[0] < b[0]) {
@@ -95,14 +107,19 @@ module.exports = {
 			})
 
 			// Create the final object to be sent to the client
-			var summary = {summary: tempReactions[0][1], topHeadline: topArticle.title, secondHeadline: secondArticle.title, likes: num_likes, loves: num_loves, wows: num_wows, hahas: num_hahas, sads: num_sads, angrys: num_angrys}
+			var summary = {
+        summary: tempReactions[0][1],
+        topHeadline: topArticle.title,
+        secondHeadline: secondArticle.title,
+        likes: num_likes,
+        loves: num_loves,
+        wows: num_wows,
+        hahas: num_hahas,
+        sads: num_sads,
+        angrys: num_angrys
+      };
 
-			// console.log(summary)
-
-			res.send(summary)
-
-		})
-	}	
-
+			res.send(summary);
+		});
+	}
 }
-
