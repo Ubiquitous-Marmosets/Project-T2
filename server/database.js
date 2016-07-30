@@ -1,4 +1,4 @@
-var Sequelize = require('Sequelize');
+var Sequelize = require('sequelize');
 var sequelize = new Sequelize('trendwave', 'root', 'cake');
 var mysql = require('mysql');
 
