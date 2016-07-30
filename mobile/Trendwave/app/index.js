@@ -32,7 +32,7 @@ export default class Trendwave extends Component {
 
     this.state = {
       popTweets: [],
-      popHeadlines: null
+      popHeadlines: []
     };
   }
 
