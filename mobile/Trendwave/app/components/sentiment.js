@@ -13,7 +13,7 @@ export default class Sentiment extends Component {
         <View style={styles.header}>
           <Text style={styles.headerTitle}>SENTIMENT</Text>
         </View>
-        <View>
+        <View style={styles.content}>
           <BarChart data={this.props.data} />
         </View>
       </View>
@@ -46,7 +46,7 @@ var styles = StyleSheet.create({
     borderRadius: 5
   },
   content: {
-    margin: 10,
-    textAlign: 'center'
+    borderRadius: 5,
+    paddingBottom: 10
   }
 });

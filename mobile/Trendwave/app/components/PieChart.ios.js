@@ -57,6 +57,7 @@ export default class SimpleChart extends Component {
           <Chart
               style={styles.chart}
               data={this.props.fbData}
+              sliceColors={colors}
               type="pie"
               showAxis={false}
            />
@@ -65,6 +66,7 @@ export default class SimpleChart extends Component {
   }
 }
 
+const colors =  ['#fb5955','#fdd400','#94c53e','#999999', '#beb06f'];
 
 const styles = StyleSheet.create({
   container: {
