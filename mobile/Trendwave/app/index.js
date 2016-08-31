@@ -10,6 +10,7 @@ import Sentiment from './components/sentiment';
 import Menu from './components/Menu';
 import moment from 'moment';
 import TrendBar from './components/trendbar';
+import Legend from './components/legend';
 
 
 export default class Trendwave extends Component {
@@ -18,7 +19,7 @@ export default class Trendwave extends Component {
 
     this.state = {
       popTweets: ['schwag'],
-      selectedTrend: 'Stephen Curry',
+      selectedTrend: 'Select a trend from side menu...',
       trends:[],
       menuOpen: false,
       fbData: [[0, 1]],
@@ -137,6 +138,7 @@ export default class Trendwave extends Component {
           <TrendBar selectedTrend={this.state.selectedTrend} />
           <ScrollView style={styles.container}>
             <PieChart fbData={this.state.fbData} />
+            <Legend />
             <PopTweets popTweets={this.state.popTweets} selectedTrend={this.state.selectedTrend}/>
             <PopHeadlines headlines={this.state.headlines} />
             <Sentiment data={this.state.barChartData} />

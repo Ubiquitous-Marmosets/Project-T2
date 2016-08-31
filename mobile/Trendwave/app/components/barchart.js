@@ -14,12 +14,12 @@ class BarChart extends React.Component {
         */}
           <View style={{flex: 1, flexDirection: 'row'}}>
             {this.props.data.ready &&
-              <View style={{flex: this.props.data.positive, backgroundColor: '#005A31', justifyContent: 'center', alignItems: 'center', height: 45}}>
+              <View style={{flex: this.props.data.positive, borderTopLeftRadius: 5, borderBottomLeftRadius: 5, backgroundColor: '#005A31', justifyContent: 'center', alignItems: 'center', height: 36}}>
                 <Text style={styles.box}> {this.props.data.positive}%</Text>
               </View>
             }
             {this.props.data.ready &&
-              <View style={{flex: this.props.data.negative, backgroundColor: '#B71427', justifyContent: 'center', alignItems: 'center', height: 45}}>
+              <View style={{flex: this.props.data.negative, borderTopRightRadius: 5, borderBottomRightRadius: 5, backgroundColor: '#B71427', justifyContent: 'center', alignItems: 'center', height: 36}}>
                 <Text style={styles.box}> {this.props.data.negative}%</Text>
               </View>
             }

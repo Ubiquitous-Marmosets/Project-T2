@@ -5,16 +5,15 @@ import {
   View
 } from 'react-native';
 
-export default class PopHeadlines extends Component {
+export default class TrendScore extends Component {
   render() {
     return (
       <View style={styles.mainContainer}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>MOST POPULAR HEADLINES</Text>
+          <Text style={styles.headerTitle}>TREND</Text>
         </View>
         <View>
-          <Text style={styles.content}>{this.props.headlines.topHeadline}</Text>
-          <Text style={styles.content}>{this.props.headlines.secondHeadline}</Text>
+          <Text style={styles.content}>Content Goes Here</Text>
         </View>
       </View>
     );
@@ -26,11 +25,13 @@ var styles = StyleSheet.create({
     backgroundColor: '#33ccff',
     paddingTop: 20,
     paddingBottom: 10,
+    // width: 300
   },
   headerTitle: {
     color: '#fff',
     textAlign: 'center',
     fontWeight: 'bold',
+    // flex: 1
   },
   mainContainer: {
     borderLeftWidth: 5,
@@ -40,13 +41,10 @@ var styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 10,
     marginRight: 10,
-    borderRadius: 5
+    flex: 1
   },
   content: {
-    fontSize: 10,
-    flex: 1,
     margin: 10,
-    textAlign: 'center',
-    paddingBottom: 15
+    textAlign: 'center'
   }
 });
